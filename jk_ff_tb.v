@@ -53,5 +53,6 @@ module jk_ff_tb;
         #2;
         set = 1'b0;
         #5;
+        $finish;
     end
 endmodule
