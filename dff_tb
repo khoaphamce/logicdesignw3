@@ -1,0 +1,95 @@
+#! /usr/bin/vvp
+:ivl_version "10.3 (stable)";
+:ivl_delay_selection "TYPICAL";
+:vpi_time_precision - 9;
+:vpi_module "system";
+:vpi_module "vhdl_sys";
+:vpi_module "v2005_math";
+:vpi_module "va_math";
+S_0x561118ebf050 .scope module, "dff_tb" "dff_tb" 2 2;
+ .timescale -9 -9;
+v0x561118f07260_0 .var "clk", 0 0;
+v0x561118f07320_0 .var "d", 0 0;
+v0x561118f073f0_0 .net "q", 0 0, v0x561118f06f20_0;  1 drivers
+v0x561118f074f0_0 .net "qbar", 0 0, v0x561118f06ff0_0;  1 drivers
+v0x561118f075c0_0 .var "reset", 0 0;
+S_0x561118ebf1d0 .scope module, "flipflop" "dff" 2 12, 3 1 0, S_0x561118ebf050;
+ .timescale -9 -9;
+    .port_info 0 /INPUT 1 "clk"
+    .port_info 1 /OUTPUT 1 "q"
+    .port_info 2 /OUTPUT 1 "qbar"
+    .port_info 3 /INPUT 1 "d"
+    .port_info 4 /INPUT 1 "reset"
+v0x561118ed2b50_0 .net "clk", 0 0, v0x561118f07260_0;  1 drivers
+v0x561118f06e60_0 .net "d", 0 0, v0x561118f07320_0;  1 drivers
+v0x561118f06f20_0 .var "q", 0 0;
+v0x561118f06ff0_0 .var "qbar", 0 0;
+v0x561118f070b0_0 .net "reset", 0 0, v0x561118f075c0_0;  1 drivers
+E_0x561118ef6c50 .event posedge, v0x561118ed2b50_0;
+    .scope S_0x561118ebf1d0;
+T_0 ;
+    %wait E_0x561118ef6c50;
+    %load/vec4 v0x561118f070b0_0;
+    %flag_set/vec4 8;
+    %jmp/0xz  T_0.0, 8;
+    %pushi/vec4 0, 0, 1;
+    %assign/vec4 v0x561118f06f20_0, 0;
+    %pushi/vec4 1, 0, 1;
+    %assign/vec4 v0x561118f06ff0_0, 0;
+    %jmp T_0.1;
+T_0.0 ;
+    %load/vec4 v0x561118f06e60_0;
+    %assign/vec4 v0x561118f06f20_0, 0;
+    %load/vec4 v0x561118f06e60_0;
+    %inv;
+    %assign/vec4 v0x561118f06ff0_0, 0;
+T_0.1 ;
+    %jmp T_0;
+    .thread T_0;
+    .scope S_0x561118ebf050;
+T_1 ;
+    %vpi_call 2 8 "$dumpfile", "dff_tb.vcd" {0 0 0};
+    %vpi_call 2 9 "$dumpvars", 32'sb00000000000000000000000000000000, S_0x561118ebf050 {0 0 0};
+    %end;
+    .thread T_1;
+    .scope S_0x561118ebf050;
+T_2 ;
+    %delay 5, 0;
+    %load/vec4 v0x561118f07260_0;
+    %inv;
+    %store/vec4 v0x561118f07260_0, 0, 1;
+    %jmp T_2;
+    .thread T_2;
+    .scope S_0x561118ebf050;
+T_3 ;
+    %pushi/vec4 1, 0, 1;
+    %assign/vec4 v0x561118f075c0_0, 0;
+    %pushi/vec4 0, 0, 1;
+    %assign/vec4 v0x561118f07260_0, 0;
+    %pushi/vec4 0, 0, 1;
+    %assign/vec4 v0x561118f07320_0, 0;
+    %pushi/vec4 20, 0, 32;
+T_3.0 %dup/vec4;
+    %pushi/vec4 0, 0, 32;
+    %cmp/s;
+    %jmp/1xz T_3.1, 5;
+    %jmp/1 T_3.1, 4;
+    %pushi/vec4 1, 0, 32;
+    %sub;
+    %wait E_0x561118ef6c50;
+    %load/vec4 v0x561118f07320_0;
+    %inv;
+    %store/vec4 v0x561118f07320_0, 0, 1;
+    %delay 5, 0;
+    %jmp T_3.0;
+T_3.1 ;
+    %pop/vec4 1;
+    %vpi_call 2 24 "$finish" {0 0 0};
+    %end;
+    .thread T_3;
+# The file index is used to find the file name in the following table.
+:file_names 4;
+    "N/A";
+    "<interactive>";
+    "dff_tb.v";
+    "dff.v";
