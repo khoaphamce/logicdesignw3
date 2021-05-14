@@ -15,5 +15,5 @@ module dff(clk, q, qbar, d);
             q = 1'b0;
         end
         qbar = ~q;
-    end
+   end
 endmodule

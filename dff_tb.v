@@ -9,7 +9,7 @@ module dff_tb;
         $dumpvars(0, dff_tb);
     end
 
-    dff flipflop(clk, q, qbar, d, reset);
+    dff flipflop(clk, q, qbar, d);
     always #5 clk = ~clk;
 
     initial begin
